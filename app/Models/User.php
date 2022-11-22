@@ -40,5 +40,42 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+
     ];
+
+    public function products()
+    {
+        return $this->hasMany(product::class);
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(article::class);
+    }
+
+    public function consulting()
+    {
+        return $this->hasMany(consultation::class);
+    }
+
+    public function oily_skin()
+    {
+        return $this->hasMany(OilySkin::class);
+    }
+
+    public function dry_skin()
+    {
+        return $this->hasMany(drySkin::class);
+    }
+
+    public function sensitive_skin()
+    {
+        return $this->hasMany(sensitiveSkin::class);
+    }
+
+
+    public function combination_skin()
+    {
+        return $this->hasMany(combinationSkin::class);
+    }
 }
