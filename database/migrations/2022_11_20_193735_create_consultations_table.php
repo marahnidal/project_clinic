@@ -16,10 +16,8 @@ return new class extends Migration
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image')->nullable();
             $table->string('comment')->nullable();
             $table->foreignId('user_id');
-            $table->integer('star');
             $table->timestamps();
         });
     }

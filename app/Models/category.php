@@ -2,12 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use App\Models\oily;
+use App\Models\skin;
+use App\Traits\Trans;
+use App\Models\doctor;
+use App\Models\oilyskin;
+use App\Models\mixedskin;
+use App\Models\normalskin;
+use App\Models\sensitiveskin;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class category extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes,Trans;
+    protected $fillable =['name','parent_id'];
 
     public function parent(){
 
@@ -26,28 +37,39 @@ class category extends Model
     }
 
 
-    public function oily_skin()
+    public function Skin()
     {
-        return $this->hasOne(OilySkin::class)->withDefault();
+        return $this->hasMany(Skin::class);
     }
 
-
-    public function dry_skin()
+    public function oilyskin()
     {
-        return $this->hasOne(drySkin::class)->withDefault();
+        return $this->hasMany(oilyskin::class);
     }
 
-
-    public function sensitive_skin()
+    public function normalskin()
     {
-        return $this->hasOne(sensitiveSkin::class)->withDefault();
+        return $this->hasMany(normalskin::class);
     }
 
-
-    public function combination_skin()
+    public function sensitiveskin()
     {
-        return $this->hasOne(combinationSkin::class)->withDefault();
+        return $this->hasMany(sensitiveskin::class);
     }
 
+    public function mixedskin()
+    {
+        return $this->hasMany(mixedskin::class);
     }
 
+
+    public function doctor()
+    {
+        return $this->hasMany(doctor::class);
+    }
+
+
+
+
+
+    }

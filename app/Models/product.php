@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\Trans;
+use App\Models\category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class product extends Model
 {
-    use HasFactory;
-
+    use HasFactory,SoftDeletes,Trans;
+    protected $guarded =[];
     public function user()
     {
 
@@ -16,31 +19,11 @@ class product extends Model
         }
 
 
-        public function category()
-        {
+        public function category(){
 
-                return $this->belongsTo(category::class)->withDefault();
-            }
-
-            public function oily_skin()
-            {
-                return $this->hasmany(OilySkin::class);
-            }
-
-            public function dry_skin()
-            {
-                return $this->hasmany(drySkin::class);
-            }
+            return $this->belongsTo(category::class)->withDefault();
+        }
 
 
-            public function sensitive_skin()
-            {
-                return $this->hasmany(sensitiveSkin::class);
-            }
 
-
-            public function combination_skin()
-            {
-                return $this->hasmany(combinationSkin::class);
-            }
 }

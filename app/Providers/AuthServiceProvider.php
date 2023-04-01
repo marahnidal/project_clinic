@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Ability;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -25,6 +27,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+       foreach(Ability::all() as $ability){
+
+
+        Gate::define($ability->code ,function ($user) use($ability){
+         return $user->role->abilities()->where('code',$ability->code)->exists();
+        });
+       }
+
+
+
     }
 }
